@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+<!-- Choose GUI -->
+<arg name="use_rviz" default="true" />
+
+<!-- Send URDF to param server, run joint_state_publisher and run robot_state_publisher -->  
+<include file="$(find tb3_description)/launch/robot_description.launch"/>
+
+<!-- Start Gazebo -->
+<include file="$(find tb3_description)/launch/gazebo.launch"/>
+  
+<!-- Spawn robot in Gazebo world -->
+<include file="$(find tb3_description)/launch/spawn_tb3.launch"/>
+
+<!-- Run Rviz with configuration file-->
+<node if="$(arg use_rviz)" name="rviz" pkg="rviz" type="rviz" respawn="false" args="-d $(find tb3_description)/config/tb3.rviz"/>
+
+</launch>
